@@ -116,7 +116,7 @@ reviews it and the run continues.
 
 See `demo/demo_notebook.ipynb` for a walkthrough with a captured sample run
 and `demo/screenshots/` for terminal captures of that run (regenerate your
-own live run by executing the notebook with your own API key — outputs will
+own live run by executing the notebook with your own API key. Outputs will
 vary slightly since it's an LLM-driven system).
 
 ## 5. Example interaction transcripts
@@ -223,7 +223,7 @@ Final Answer:
   ("you'll earn 13.5%"). **Solution:** the Risk & Compliance Checker's task
   description explicitly lists 3 pass/fail criteria (disclaimer, risk
   fit, no guaranteed-return language) and is instructed to rewrite, not
-  just flag, failing output — turning the reflection loop into an actual
+  just flag, failing output but also turning the reflection loop into an actual
   editing step rather than a rubber stamp.
 - **Challenge 3: runaway tool-call loops:** LLM agents can occasionally call
   a tool repeatedly with slightly different arguments. **Solution:**
