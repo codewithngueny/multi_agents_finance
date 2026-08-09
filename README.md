@@ -8,12 +8,9 @@ I chose the Personal Finance Assistant Team because budgeting is a problem I reg
 
 This use case also provides a practical way to implement human-in-the-loop and reflection/critique mechanisms. Financial recommendations can affect how a person manages their money, so they should not simply be generated and presented without review. In this system, the user can review the savings recommendation before the workflow continues, while the Risk & Compliance Checker provides an additional review for issues such as inappropriate recommendations or misleading claims. This makes the assignment's safety and oversight requirements relevant to the actual problem rather than features added only to satisfy the technical requirements.
 
-A single generalist agent asked to "parse this CSV, build a budget, spot
-patterns, and recommend savings options" tends to either skip steps, blend
-categorization mistakes into the final numbers, or generate savings advice
-without pausing to check it — because it never has to hand off its own work
-for a second opinion. Splitting the job across specialists with an
-orchestrator forces exactly that checkpointing.
+A single general-purpose agent asked to parse a CSV file, create a budget, identify spending patterns, and provide savings recommendations may try to handle all of these tasks in one continuous process. This can make it easier for mistakes in transaction categorization to affect later calculations or for important steps to be overlooked. It may also generate financial recommendations without having a separate stage to review whether the advice is appropriate.
+
+By dividing the work among specialized agents, each stage has a clear responsibility and its results can be passed to the next agent for further analysis. The orchestrator manages these handoffs and ensures that the workflow follows the correct order. This creates useful checkpoints where previous results can be reviewed, corrected, or challenged before they are used in the final recommendation. It therefore makes the overall process more structured, transparent, and reliable than asking one agent to complete the entire task on its own.
 
 ## 2. Agent team diagram
 
