@@ -66,7 +66,7 @@ Savings Advisor → Risk Checker → Summary Generator, orchestrated by the
 Supervisor, with the Risk Checker's critique feeding back into the final
 report only after the Savings Advisor's draft has been approved by a human.
 
-## 3. Required technical elements — where to find them
+## 3. Required technical elements and where to find them
 
 | Requirement | Where implemented |
 |---|---|
