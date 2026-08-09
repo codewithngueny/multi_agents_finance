@@ -28,7 +28,6 @@ orchestrator forces exactly that checkpointing.
 
 ## 2. Agent team diagram
 
-```
                          ┌────────────────────────────┐
                          │  SUPERVISOR / ORCHESTRATOR  │
                          │   (CrewAI hierarchical      │
@@ -61,14 +60,13 @@ orchestrator forces exactly that checkpointing.
 Shared memory: a JSON "blackboard" (shared_state.json) that every agent
 reads/writes via the SharedMemoryRead / SharedMemoryWrite tools, in addition
 to CrewAI's task-to-task `context=[...]` chaining.
-```
 
 **Communication flow:** Categorizer → Forecaster → Pattern Detector →
 Savings Advisor → Risk Checker → Summary Generator, orchestrated by the
 Supervisor, with the Risk Checker's critique feeding back into the final
 report only after the Savings Advisor's draft has been approved by a human.
 
-## 3. Required technical elements — where to find them
+## 3. Required technical elements and where to find them
 
 | Requirement | Where implemented |
 |---|---|
@@ -130,7 +128,7 @@ and was lightly trimmed for length.)*
 
 ### Transcript 1 — Categorizer → Forecaster handoff
 
-```
+
 [Data Ingestion & Categorizer]
 Thought: I need to parse the transaction CSV and categorize each row.
 Action: Transaction Parser and Categorizer("data/sample_transactions.csv")
@@ -156,7 +154,6 @@ Final Answer: The user is currently overspending by KES 4,860/month
 
 ### Transcript 2 — Human-in-the-loop checkpoint on savings advice
 
-```
 [Savings & Investment Advisor]
 Thought: With a negative savings rate, I should NOT recommend locking money
 into investments yet — the priority is closing the deficit first. I'll
@@ -208,7 +205,7 @@ Final Answer:
 - **Savings advice (risk-approved):** Focus on closing the deficit first;
   once balanced, a Money Market Fund or SACCO deposit are reasonable
   low-risk starting points (not guaranteed returns; not licensed advice).
-```
+
 
 ## 6. Key challenges & solutions
 
@@ -236,4 +233,3 @@ Final Answer:
   adds LLM calls. **Solution:** defaulted to a small/cheap model
   (`claude-3-5-haiku` / `gpt-4o-mini`) for this coursework demo, and kept
   each agent's task narrowly scoped so it needs few tool calls to finish.
->>>>>>> c31012d (Initial commit)
