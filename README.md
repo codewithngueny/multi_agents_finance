@@ -4,17 +4,9 @@
 
 ## 1. Chosen use case & rationale
 
-I chose the **Personal Finance Assistant Team**. Budgeting is a problem I run
-into constantly as a student juggling tuition, rent, and daily M-Pesa
-spending, and it maps naturally onto a *division-of-labor* multi-agent
-design: parsing raw transactions, forecasting a budget, spotting behavioral
-spending patterns, and giving savings advice are genuinely different skills
-that benefit from separate, focused prompts rather than one agent trying to
-do everything at once. It also gives a natural, low-risk place to practice
-**human-in-the-loop** and **reflection/critique** — financial advice is
-exactly the kind of output that should be reviewed before it reaches a user,
-which made the assignment's safety requirements feel motivated rather than
-bolted on.
+I chose the Personal Finance Assistant Team because budgeting is a problem I regularly deal with as a student managing tuition, rent, and everyday M-Pesa expenses. This use case fits naturally with a division-of-labor multi-agent design because the different parts of financial management require different types of analysis. One agent can focus on parsing and categorizing raw transactions, another can calculate and forecast the budget, another can identify spending patterns, and another can provide savings recommendations. Giving each agent a specific responsibility makes the workflow more organized and reduces the need for one agent to handle everything at once.
+
+This use case also provides a practical way to implement human-in-the-loop and reflection/critique mechanisms. Financial recommendations can affect how a person manages their money, so they should not simply be generated and presented without review. In this system, the user can review the savings recommendation before the workflow continues, while the Risk & Compliance Checker provides an additional review for issues such as inappropriate recommendations or misleading claims. This makes the assignment's safety and oversight requirements relevant to the actual problem rather than features added only to satisfy the technical requirements.
 
 A single generalist agent asked to "parse this CSV, build a budget, spot
 patterns, and recommend savings options" tends to either skip steps, blend
