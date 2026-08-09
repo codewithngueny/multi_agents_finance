@@ -1,9 +1,7 @@
 # Personal Finance Assistant Team: A Multi-Agent AI System
-```
 **Framework:** CrewAI (role/task-centric, hierarchical process)
-```
 **Use case:** Option 4:Personal Finance Assistant Team
-```
+
 
 ## 1. Chosen use case & rationale
 
