@@ -1,9 +1,7 @@
-# multi_agents_finance
-# Personal Finance Assistant Team — A Multi-Agent AI System
+# Personal Finance Assistant Team: A Multi-Agent AI System
 
-**Course:** DSA 2020A: Artificial Intelligence — Lab 2
 **Framework:** CrewAI (role/task-centric, hierarchical process)
-**Use case:** Option 4 — Personal Finance Assistant Team
+**Use case:** Option 4: Personal Finance Assistant Team
 
 ## 1. Chosen use case & rationale
 
@@ -28,6 +26,7 @@ orchestrator forces exactly that checkpointing.
 
 ## 2. Agent team diagram
 
+```
                          ┌────────────────────────────┐
                          │  SUPERVISOR / ORCHESTRATOR  │
                          │   (CrewAI hierarchical      │
@@ -60,13 +59,14 @@ orchestrator forces exactly that checkpointing.
 Shared memory: a JSON "blackboard" (shared_state.json) that every agent
 reads/writes via the SharedMemoryRead / SharedMemoryWrite tools, in addition
 to CrewAI's task-to-task `context=[...]` chaining.
+```
 
 **Communication flow:** Categorizer → Forecaster → Pattern Detector →
 Savings Advisor → Risk Checker → Summary Generator, orchestrated by the
 Supervisor, with the Risk Checker's critique feeding back into the final
 report only after the Savings Advisor's draft has been approved by a human.
 
-## 3. Required technical elements and where to find them
+## 3. Required technical elements — where to find them
 
 | Requirement | Where implemented |
 |---|---|
@@ -95,9 +95,9 @@ pip install -r requirements.txt
 Set **one** of the following environment variables before running:
 
 ```bash
-export ANTHROPIC_API_KEY=sk-ant-...     # uses claude-3-5-haiku (recommended, cheap)
+export ANTHROPIC_API_KEY=sk-ant-...   
 # or
-export OPENAI_API_KEY=sk-...            # uses gpt-4o-mini
+export OPENAI_API_KEY=sk-...   
 ```
 
 ### Run
@@ -128,7 +128,7 @@ and was lightly trimmed for length.)*
 
 ### Transcript 1 — Categorizer → Forecaster handoff
 
-
+```
 [Data Ingestion & Categorizer]
 Thought: I need to parse the transaction CSV and categorize each row.
 Action: Transaction Parser and Categorizer("data/sample_transactions.csv")
@@ -154,6 +154,7 @@ Final Answer: The user is currently overspending by KES 4,860/month
 
 ### Transcript 2 — Human-in-the-loop checkpoint on savings advice
 
+```
 [Savings & Investment Advisor]
 Thought: With a negative savings rate, I should NOT recommend locking money
 into investments yet — the priority is closing the deficit first. I'll
@@ -180,7 +181,7 @@ a SACCO fixed deposit (~11% p.a.) are reasonable starting points. This is
 educational information, not licensed financial advice."
 ```
 
-### Transcript 3 — Risk & Compliance critique and rewrite
+### Transcript 3: Risk & Compliance critique and rewrite
 
 ```
 [Risk & Compliance Checker]
@@ -205,11 +206,11 @@ Final Answer:
 - **Savings advice (risk-approved):** Focus on closing the deficit first;
   once balanced, a Money Market Fund or SACCO deposit are reasonable
   low-risk starting points (not guaranteed returns; not licensed advice).
-
+```
 
 ## 6. Key challenges & solutions
 
-- **Challenge — agents re-deriving numbers instead of reusing them:** early
+- **Challenge 1: agents re-deriving numbers instead of reusing them:** early
   runs showed the Forecaster occasionally re-estimating totals from the raw
   description text instead of using the Categorizer's exact JSON output.
   **Solution:** the JSON blackboard (`shared_state.json`) plus explicit
@@ -217,19 +218,19 @@ Final Answer:
   is always injected into the next agent's prompt, and each tool's
   docstring explicitly tells the agent to write to shared memory so later
   agents can read it verbatim instead of re-estimating.
-- **Challenge — the Savings Advisor being overconfident:** without a
+- **Challenge 2: the Savings Advisor being overconfident:** without a
   reviewer, the advisor tended to phrase indicative rates as promises
   ("you'll earn 13.5%"). **Solution:** the Risk & Compliance Checker's task
   description explicitly lists 3 pass/fail criteria (disclaimer, risk
   fit, no guaranteed-return language) and is instructed to rewrite, not
   just flag, failing output — turning the reflection loop into an actual
   editing step rather than a rubber stamp.
-- **Challenge — runaway tool-call loops:** LLM agents can occasionally call
+- **Challenge 3: runaway tool-call loops:** LLM agents can occasionally call
   a tool repeatedly with slightly different arguments. **Solution:**
   `max_iter=5` per agent caps this, and the hierarchical process's fixed
   task list gives a hard termination condition (the crew ends once the
   Summary Generator produces its output).
-- **Challenge — cost/latency of a 6-agent chain:** every additional agent
+- **Challenge 4: cost/latency of a 6-agent chain:** every additional agent
   adds LLM calls. **Solution:** defaulted to a small/cheap model
   (`claude-3-5-haiku` / `gpt-4o-mini`) for this coursework demo, and kept
   each agent's task narrowly scoped so it needs few tool calls to finish.
