@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 # multi_agents_finance
-=======
 # Personal Finance Assistant Team — A Multi-Agent AI System
 
 **Course:** DSA 2020A: Artificial Intelligence — Lab 2
