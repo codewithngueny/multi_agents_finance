@@ -54,7 +54,7 @@ Savings Advisor → Risk Checker → Summary Generator, orchestrated by the
 Supervisor, with the Risk Checker's critique feeding back into the final
 report only after the Savings Advisor's draft has been approved by a human.
 
-## 3. Required technical elements — where to find them
+## 3. Required technical elements and where to find them
 
 | Requirement | Where implemented |
 |---|---|
@@ -62,7 +62,7 @@ report only after the Savings Advisor's draft has been approved by a human.
 | 3–5 specialized worker agents | 6 agents defined in `build_crew()`: Categorizer, Forecaster, Pattern Detector, Savings Advisor, Risk Checker, Summary Generator |
 | Shared state/memory | `shared_state.json` blackboard + `read_shared_memory` / `write_shared_memory` tools in `tools.py` |
 | Tool integration (2–3 tools) | `parse_transactions`, `calculate_budget`, `lookup_market_rates` in `tools.py` |
-| Human-in-the-loop | `human_input=True` on the Savings Advisor task (`t4_savings_advice`) — CrewAI pauses for user approval/feedback before the task is marked complete |
+| Human-in-the-loop | `human_input=True` on the Savings Advisor task (`t4_savings_advice`) CrewAI pauses for user approval/feedback before the task is marked complete |
 | Reflection/critique loop | Risk & Compliance Checker agent (`t5_risk_review`) reviews and rewrites the Savings Advisor's output before it reaches the Summary Generator |
 | Streaming of thoughts/actions | `verbose=True` on every agent and on the `Crew` itself |
 | Termination condition | Crew ends once the final task (`t6_summary`) produces output; each agent additionally caps tool-call loops with `max_iter=5` as a loop guard |
